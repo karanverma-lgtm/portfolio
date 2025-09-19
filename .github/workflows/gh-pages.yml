@@ -8,10 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show git status (debug)
+        run: |
+          git --version
+          git status --porcelain --untracked-files=all || true
+          git rev-parse --abbrev-ref HEAD || true
+          ls -la
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
