@@ -29,7 +29,8 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Use a personal PAT stored in repository secrets with repo push permission
+          personal_token: ${{ secrets.GH_PAGES_PAT }}
           publish_dir: ./
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com

@@ -409,6 +409,111 @@
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-20px) rotate(10deg); }
     }
+
+    /* Certifications - injected to ensure inline styles take precedence */
+    .cert-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+      margin-top:28px;
+    }
+
+    .cert-card{
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      padding:20px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(.2,.9,.3,1), box-shadow 0.35s ease;
+      overflow: hidden;
+    }
+
+    .cert-card::before{
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(90deg, #ff6b6b, #e50914, #9b59ff, #00bcd4, #ff6b6b);
+      background-size: 200% 200%;
+      filter: blur(8px);
+      opacity: 0.08;
+      z-index: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .cert-card:hover::before{ opacity: 1; animation: gradientShift 4s linear infinite; }
+
+    @keyframes gradientShift{ 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
+    .cert-card > *{ position: relative; z-index: 2 }
+
+    .cert-icon{
+      width:56px;
+      height:56px;
+      flex: 0 0 56px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, #0f0f0f, #161616);
+      box-shadow: 0 6px 18px rgba(229,9,20,0.06);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .cert-icon svg{ width:36px;height:36px; filter: drop-shadow(0 8px 20px rgba(229,9,20,0.14)); transition: transform 0.28s ease }
+
+    .cert-title{ font-size:1.05rem; font-weight:800; color:#fff; margin:0; background:linear-gradient(45deg,#ff6b6b,#e50914); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent }
+    .cert-issuer{ color:#f3f3f3; opacity:0.95; font-weight:600; margin-top:6px }
+    .cert-date{ color:#cfcfcf; font-size:.86rem; margin-top:6px }
+    .cert-desc{ color:#dcdcdc; margin-top:8px }
+
+    .cert-card:hover{ transform: translateY(-14px) rotateX(3deg) rotateY(-2deg); box-shadow: 0 30px 60px rgba(229,9,20,0.14) }
+    .cert-card:hover .cert-icon{ transform: translateY(-4px) scale(1.03); box-shadow: 0 20px 40px rgba(229,9,20,0.12) }
+    .cert-card:hover .cert-icon svg{ transform: scale(1.06) }
+
+    @media (max-width:720px){ .cert-card{ flex-direction:row; gap:12px } .cert-icon{ width:48px; height:48px; flex:0 0 48px } }
+
+    /* Badges and refined animations */
+    .cert-badge{
+      position:absolute;
+      bottom:8px;
+      right:8px;
+      background:rgba(0,0,0,0.5);
+      color:#fff;
+      font-weight:700;
+      font-size:0.72rem;
+      padding:6px 8px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(4px);
+    }
+    .cert-badge.upgrad{ background: linear-gradient(90deg,#ff6b6b,#e50914) }
+    .cert-badge.wati{ background: linear-gradient(90deg,#2dbd3a,#159b2b) }
+    .cert-badge.simplilearn{ background: linear-gradient(90deg,#ffcc00,#f4b400); color:#111 }
+    .cert-badge.greatlearning{ background: linear-gradient(90deg,#6c63ff,#4b39ff) }
+    .cert-badge.google{ background: linear-gradient(90deg,#34a853,#0f9d58) }
+    .cert-badge.hubspot{ background: linear-gradient(90deg,#ff9f00,#ff6b00) }
+
+    /* Entrance animation for cards */
+    .cert-card{ opacity:0; transform: translateY(18px) scale(.995); transition: transform .45s cubic-bezier(.2,.9,.3,1), opacity .45s ease }
+    .cert-card.visible{ opacity:1; transform: translateY(0) scale(1) }
+
+    /* subtle floating for icons */
+    @keyframes iconFloat{ 0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)} }
+    .cert-icon{ animation: iconFloat 6s ease-in-out infinite }
+  .cert-body{ flex:1; min-width:0; display:flex; flex-direction:column; gap:6px }
+  .cert-title{ line-height:1.1; font-size:1.05rem }
+  .cert-issuer, .cert-date{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+
+  .cert-card{ min-height:160px }
+  .cert-desc{ white-space:normal; overflow-wrap:break-word }
+  @media (max-width:900px){ .cert-grid{ grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) } .cert-card{ min-height:140px } }
+  @media (max-width:520px){ .cert-grid{ grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) } .cert-card{ min-height:130px } }
   </style>
 </head>
 <body>
@@ -420,6 +525,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -455,16 +561,35 @@
       <div class="experience-card">
         <div class="company-header">
           <div>
+            <div class="company-name">Erickson Coaching International – India</div>
+            <div class="role-title">Head of Marketing</div>
+          </div>
+          <div class="duration">Jun 2024 – Present | Noida, India</div>
+        </div>
+        <ul class="achievements">
+          <li>Leading a cross-functional team of 10+ marketing, data, and technology professionals, driving integrated strategies across digital, automation, and analytics.</li>
+          <li>Implementing AI-powered marketing campaigns and automation workflows, reducing manual effort by 42% and accelerating lead-to-customer conversion by 37%.</li>
+          <li>Overseeing data-driven marketing, leveraging CRM systems, predictive analytics, and attribution modeling to optimize ROI, resulting in a 46% increase in marketing ROI and 33% lower CPL.</li>
+          <li>Designing and deploying custom marketing apps and automation tools to streamline campaigns, enhance customer journey mapping, and boost engagement rates by 39%.</li>
+          <li>Developing and implementing omni-channel strategies (SEO, paid media, social, and email automation) aligned with business objectives, generating a 58% growth in qualified leads and a 41% increase in brand visibility.</li>
+          <li>Championing the integration of AI in marketing technology stacks to deliver personalized customer experiences, driving a 44% uplift in campaign efficiency and stronger customer retention.</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="company-header">
+          <div>
             <div class="company-name">Irish Expert</div>
             <div class="role-title">Head of Marketing</div>
           </div>
-          <div class="duration">Nov 2023 – May 2024</div>
+          <div class="duration">Nov 2023 – May 2024 | Delhi, India</div>
         </div>
         <ul class="achievements">
-          <li>Boosted lead conversion rates by 35% through AI-powered marketing automation workflows</li>
-          <li>Reduced cost-per-lead (CPL) by 28% using intelligent optimization strategies</li>
-          <li>Delivered 40% ROI increase within 6 months via omni-channel campaigns</li>
-          <li>Led cross-functional teams to execute scalable, data-driven marketing campaigns</li>
+          <li>Directed a team of designers, analysts, and developers to deliver campaigns that boosted qualified leads by 36% within 6 months.</li>
+          <li>Launched AI-driven automation workflows, reducing reporting effort by 41% and improving campaign execution speed by 32%.</li>
+          <li>Optimized paid media, SEO, and social channels, driving a 47% increase in ROI and reducing CPL by 38%.</li>
+          <li>Implemented advanced analytics dashboards, improving marketing attribution accuracy by 43%.</li>
+          <li>Scaled global SEO strategy, securing top rankings in competitive U.S. local markets and increasing organic traffic by 52%.</li>
         </ul>
       </div>
 
@@ -474,27 +599,31 @@
             <div class="company-name">Skills Caravan LXP</div>
             <div class="role-title">Marketing Manager</div>
           </div>
-          <div class="duration">Apr 2023 – Nov 2023</div>
+          <div class="duration">Apr 2023 – Nov 2023 | Delhi, India</div>
         </div>
         <ul class="achievements">
-          <li>Increased MQL-to-SQL conversion by 30% through CRM-based lead nurturing</li>
-          <li>Achieved top 3 SERP rankings, driving 60% organic traffic growth</li>
-          <li>Launched AI-driven B2B segmentation campaigns for enhanced engagement</li>
+          <li>Implemented CRM-based lead nurturing campaigns, improving MQL-to-SQL conversion rates by 34%.</li>
+          <li>Drove SEO and content strategies, delivering a 56% surge in organic traffic and a 29% increase in high-intent leads.</li>
+          <li>Launched AI-driven segmentation for B2B campaigns, achieving a 44% engagement uplift and 39% ROI growth.</li>
+          <li>Streamlined reporting processes with automation, cutting reporting time by 37% while improving accuracy.</li>
+          <li>Enhanced email marketing automation flows, boosting CTR by 31%.</li>
         </ul>
       </div>
 
       <div class="experience-card">
         <div class="company-header">
           <div>
-            <div class="company-name">xMonks</div>
-            <div class="role-title">Assistant Digital Marketing Manager</div>
+            <div class="company-name">xMonks – An Ecosystem</div>
+            <div class="role-title">Assistant Digital Marketing Manager / Digital Marketing Executive</div>
           </div>
-          <div class="duration">Nov 2021 – Mar 2023</div>
+          <div class="duration">Oct 2020 – Mar 2023 | Gurugram, India</div>
         </div>
         <ul class="achievements">
-          <li>Designed automation-driven funnels boosting qualified leads by 45% YoY</li>
-          <li>Managed paid campaigns delivering 5x ROAS across multiple platforms</li>
-          <li>Implemented analytics frameworks tracking CPL, CAC, and ROI metrics</li>
+          <li>Developed automation-driven funnels for webinars and programs, boosting qualified leads by 42% YoY.</li>
+          <li>Managed paid campaigns across Google, LinkedIn, and Facebook, achieving 5.3x ROAS.</li>
+          <li>Optimized email automation, increasing open rates by 31% and CTR by 28%.</li>
+          <li>Built analytics dashboards to track CPL, CAC, and ROI, improving budget allocation efficiency by 36%.</li>
+          <li>Executed SEO campaigns that pushed multiple program keywords into top 5 SERP results.</li>
         </ul>
       </div>
 
@@ -504,11 +633,31 @@
             <div class="company-name">NetCom Learning</div>
             <div class="role-title">Growth Marketing Associate</div>
           </div>
-          <div class="duration">Jan 2020 – Oct 2020</div>
+          <div class="duration">Jan 2020 – Oct 2020 | Noida, India</div>
         </div>
         <ul class="achievements">
-          <li>Improved lead pipeline by 50% within 3 quarters through performance marketing</li>
-          <li>Developed account-based marketing strategies for enterprise deals</li>
+          <li>Executed multi-channel campaigns that grew the lead pipeline by 52% within 9 months.</li>
+          <li>Designed account-based marketing strategies, boosting enterprise-level deals by 35%.</li>
+          <li>Optimized CRO-focused landing pages, improving conversions by 27%.</li>
+          <li>Introduced automation tools for campaign tracking and reporting, saving 38% of manual effort.</li>
+          <li>Collaborated with sales teams to align campaigns, improving lead-to-deal conversion by 22%.</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="company-header">
+          <div>
+            <div class="company-name">Freelance Web Developer (Marketing Automation Projects)</div>
+            <div class="role-title"></div>
+          </div>
+          <div class="duration">Jun 2016 – Aug 2019 | Noida, India</div>
+        </div>
+        <ul class="achievements">
+          <li>Built websites and landing pages integrated with CRMs and automation platforms, enhancing client lead generation efficiency by 43%.</li>
+          <li>Developed Python-based marketing automation scripts, cutting manual effort by 38% for client campaigns.</li>
+          <li>Created chatbots and automation workflows for customer engagement.</li>
+          <li>Optimized website SEO and analytics, boosting traffic by 29% across multiple client projects.</li>
+          <li>Delivered end-to-end digital marketing solutions, from design to automation setup, improving client ROI by 34%.</li>
         </ul>
       </div>
     </div>
@@ -564,6 +713,115 @@
     </div>
   </section>
 
+  <!-- Certifications Section -->
+  <section id="certifications" class="section fade-in">
+    <h2>Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3.2" fill="#ff6b6b"/><path d="M4 18c1.6-3 4.8-5 8-5s6.4 2 8 5v1H4v-1z" fill="#e6e6e6"/></svg>
+          <div class="cert-badge upgrad" title="upGrad &amp; Microsoft">UG</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Generative AI Foundations Certificate</div>
+          <div class="cert-issuer">upGrad &amp; Microsoft</div>
+          <div class="cert-date">Issued Aug 2025</div>
+          <p class="cert-desc">Hands-on expertise in Generative AI, Prompt Engineering, Machine Learning, and AI-powered business applications.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="14" rx="2" fill="#34af23"/><path d="M7 17l2-2h6l2 2" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="cert-badge wati" title="Wati">WA</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">WhatsApp API Expert</div>
+          <div class="cert-issuer">Wati</div>
+          <div class="cert-date">Issued May 2024</div>
+          <p class="cert-desc">Specialized in WhatsApp marketing automation, customer engagement, and AI-driven conversational workflows.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="#ffcc00"/><path d="M8 9h8M8 12h8M8 15h5" stroke="#222" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="cert-badge simplilearn" title="Simplilearn">SL</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">ChatGPT 101</div>
+          <div class="cert-issuer">Simplilearn</div>
+          <div class="cert-date">Issued Oct 2023</div>
+          <p class="cert-desc">Applied ChatGPT for AI-driven marketing, automation, and customer experience strategies.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="12" rx="2" fill="#6c63ff"/><path d="M7 10h10M7 13h6" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="cert-badge greatlearning" title="Great Learning">GL</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">ChatGPT for Beginners</div>
+          <div class="cert-issuer">Great Learning</div>
+          <div class="cert-date">Issued Oct 2023</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3" fill="#ff6b6b"/><path d="M4 18c1.6-3 4.8-5 8-5s6.4 2 8 5v1H4v-1z" fill="#e6e6e6"/></svg>
+          <div class="cert-badge greatlearning" title="Great Learning">GL</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">ChatGPT for Digital Marketing</div>
+          <div class="cert-issuer">Great Learning</div>
+          <div class="cert-date">Issued Oct 2023</div>
+          <p class="cert-desc">Leveraging ChatGPT for copywriting, personalization, and digital marketing campaigns.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="6" width="18" height="12" rx="2" fill="#34a853"/><path d="M6 9h3v6H6zM11 9h3v6h-3zM16 9h3v6h-3z" fill="#fff"/></svg>
+          <div class="cert-badge google" title="Google">G</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Introduction to Data Studio</div>
+          <div class="cert-issuer">Google</div>
+          <div class="cert-date">Issued Dec 2021 – Exp. Dec 2024</div>
+          <p class="cert-desc">Proficient in marketing analytics dashboards, reporting, and performance measurement.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h6l3-8 3 16 3-6 3 6" stroke="#ff9f00" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <div class="cert-badge hubspot" title="HubSpot">HS</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Digital Advertising – HubSpot Academy</div>
+          <div class="cert-issuer">HubSpot Academy</div>
+          <div class="cert-date">Apr 2022 – May 2023</div>
+          <p class="cert-desc">Learned to design, launch, and optimize paid campaigns across Google, Facebook, and LinkedIn for maximum ROI.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="#00bcd4"/><path d="M8 12h8M8 15h5" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="cert-badge hubspot" title="HubSpot">HS</div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Digital Marketing – HubSpot Academy</div>
+          <div class="cert-issuer">HubSpot Academy</div>
+          <div class="cert-date">Apr 2022 – May 2023</div>
+          <p class="cert-desc">Gained expertise in inbound marketing, content strategy, SEO, and lead nurturing using HubSpot tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="section fade-in">
     <div class="contact-section">
@@ -610,6 +868,11 @@
 
     document.querySelectorAll('.fade-in').forEach(el => {
       observer.observe(el);
+    });
+
+    // Also observe individual cert cards for entrance animation
+    document.querySelectorAll('.cert-card').forEach(card => {
+      observer.observe(card);
     });
 
     // Navbar background change on scroll
