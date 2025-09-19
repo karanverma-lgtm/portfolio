@@ -1,0 +1,22 @@
+name: Debug Actions Environment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show node and git
+        run: |
+          node --version || echo "node not found"
+          git --version
+
+      - name: List root files
+        run: ls -la
